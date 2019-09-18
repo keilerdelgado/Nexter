@@ -1,0 +1,63 @@
+// COLOR VARIABLES
+$color-primary: #c69963;
+$color-primary-dark: #B28451;
+
+$color-secondary: #101d2c;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #54483A;
+$color-grey-dark-2: #6D5D4B;
+
+// FONT VARIABLES
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+
+//RESPONSIVE BREAKPOINTS
+//em es una medida de referencia donde se toma en cuenta la medida de la tipografia del padre contenedor como referencia 
+//usamos em para los breakpoints asi cuando variamos la media del rem afecta tambien los breakpoints ya que los em van a usar el valor del rem como referencia, por ello entonces la referencia esta en una sola medida, el rem
+$bp-largest: 75em; //1200px
+$bp-large: 62.5em; //1000px
+$bp-medium: 50em; //800px
+$bp-small: 37.5em; //600px
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //   10px / 16px = 62.5% (16px browser default) -> 1rem = 10px
+    //los rem son unidades de medida que toman como referencia el tamaño de la fuente del ::root que es por defecto 16px
+
+    @media only screen and (max-width: $bp-largest){
+        font-size: 50%; //estamos cambiando el rem de 10px a 8px
+    }
+}
+body {
+    font-family: $font-primary;
+    color: $color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    //en las columnas que sirven de margenes usamos minmax(6rem,1fr) establecemos un espacio minimo de 60px para que tenga espacio el contenido, porque con solo el 1fr queda muy justo el contenido en algunas pantallas
+
+    @media only screen and (max-width: $bp-large) {
+        grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+        grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+        grid-template-rows: 6rem calc(100vh - 6rem); //borramos todas las otras filas ya que automaticamente se van a ajustar segun el contenido (min-content) y eso nos sirve
+    }
+}

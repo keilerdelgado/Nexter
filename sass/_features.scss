@@ -1,0 +1,31 @@
+.features {
+    //grid-row: ;
+    grid-column: center-start / center-end;
+
+    margin: 15rem 0;
+
+    display: grid;
+    //grid-template-columns: repeat(3, 1fr); //lo cambiamos por el de abajo para que se adapte al ancho de la pantalla, sin escribir un solo query
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));//le indicamos que va a llenar el grid automaticamente donde el ancho minimo sera de 250px y el maximo es lo que sea necesario para ocupar la celda
+    grid-gap: 6rem;
+    align-items: start;
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 2.5rem;
+
+    &__icon {
+        fill: $color-primary;
+        width: 4.5rem;
+        height: 4.5rem;
+        grid-row: 1 / span 2;
+        //cuando no definimos filas no podemos usar el -1 porque solo funciona para grid explicitos, por ello usamos el span para indicarle que debe tomar dos celdas
+        transform: translateY(-1rem);
+    }
+    &__text {
+        font-size: 1.7rem;
+    }
+}
